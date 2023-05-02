@@ -1,0 +1,42 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "repository": "https://github.com/rkdwn/bot",
+  "author": "rkdwn <kj2693119@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "config:develop": "cp -av envs/develop.env .env",
+    "config:deploy": "cp -av envs/deploy.env .env",
+    "build:clean": "rm -rf build",
+    "build:compile": "tsc --build",
+    "build": "run-s build:clean build:compile",
+    "build:develop": "run-s config:develop build",
+    "build:deploy": "run-s config:deploy build",
+    "start:daemon": "node build/main.js",
+    "start": "nodemon --exec ts-node -r tsconfig-paths/register --transpile-only src/main.ts",
+    "start:local": "run-s config:develop start",
+    "start:develop": "run-s build:develop start:daemon",
+    "start:deploy": "run-s build:deploy start:daemon"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "module-alias": "^2.2.2",
+    "node-telegram-bot-api": "^0.61.0",
+    "nodemon": "^2.0.22",
+    "reflect-metadata": "^0.1.13",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/module-alias": "^2.0.1",
+    "@types/node-telegram-bot-api": "^0.61.6",
+    "@types/uuid": "^9.0.1",
+    "@types/winston": "^2.4.4",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
+  }
+}
