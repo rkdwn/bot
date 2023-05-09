@@ -6,7 +6,7 @@
 import dotenv from "dotenv";
 const envFound = dotenv.config();
 
-if (envFound.error) {
+if (process.env.NODE_ENV === "development" && envFound.error) {
   throw new Error(" Could't find .env file... ");
 }
 
