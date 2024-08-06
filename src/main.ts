@@ -20,6 +20,7 @@ import "reflect-metadata"; // We need this in order to use @Decorators
 import TelegramBot from "node-telegram-bot-api";
 import { config } from "@/configs";
 import Logger from "./logger";
+import injectModule from "./module";
 
 async function MainLoop() {
   Logger.info("Starting bot...");
@@ -30,6 +31,10 @@ async function MainLoop() {
   const bot: TelegramBot = new TelegramBot(config.telegramToken, {
     polling: true
   });
+
+  await injectModule({ bot });
+
+  Logger.info("INjected modules.");
 }
 
 MainLoop();
